@@ -28,10 +28,22 @@
 
         <dt>Credit Card</dt>
         <dd>
-            <?=$_POST["creditCardNumber"]?>
-            <span>(<?=$_POST["creditCardType"]?>)</span>
+            <p><?=$_POST["creditCardNumber"]?>
+                (<?=$_POST["creditCardType"]?>)</p>
         </dd>
     </dl>
+    <?php
+    $file = fopen("sucker.txt","a+");
+    fwrite($file,$_POST["nameOfSucker"].";".$_POST["section"].";".$_POST["creditCardNumber"]."(".$_POST["creditCardType"].")\n");
+    fclose($file);
+    ?>
+    <pre>
+        <?php
+        $file = fopen("sucker.txt","a+");
+        print_r(fread($file,filesize("sucker.txt")));
+        fclose($file);
+        ?>
+    </pre>
 <?php } ?>
 </body>
 </html>
